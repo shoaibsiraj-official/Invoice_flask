@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Invoice {{ invoice.invoice_no }}</title>
+<style>
+body { font-family: Arial, sans-serif; margin:20px;}
+table { width:100%; border-collapse: collapse; margin-top:20px;}
+th, td { border:1px solid black; padding:8px; text-align:left;}
+h2, h3 { text-align:center; }
+p { margin: 5px 0; }
+</style>
+</head>
+<body>
+<h2>GST Invoice</h2>
+<p><strong>Invoice No:</strong> {{ invoice.invoice_no }} | <strong>Date:</strong> {{ invoice.invoice_date }}</p>
+<p><strong>Client:</strong> {{ invoice.client_name }} | GSTIN: {{ invoice.client_gstin }}</p>
+<p><strong>Subscription:</strong> {{ invoice.subscription_period }}</p>
+
+<table>
+<tr>
+<th>Description</th>
+<th>Amount (₹)</th>
+<th>GST %</th>
+<th>CGST (₹)</th>
+<th>SGST (₹)</th>
+<th>Total (₹)</th>
+</tr>
+<tr>
+<td>Annual Subscription</td>
+<td>{{ '%.2f' % invoice.amount }}</td>
+<td>{{ '%.2f' % invoice.gst_percentage }}</td>
+<td>{{ '%.2f' % cgst }}</td>
+<td>{{ '%.2f' % sgst }}</td>
+<td>{{ '%.2f' % total_amount }}</td>
+</tr>
+</table>
+
+<p><strong>Total Payable: ₹{{ '%.2f' % total_amount }}</strong></p>
+<p><strong>Razorpay TXN ID:</strong> {{ invoice.razorpay_txn_id }}</p>
+</body>
+</html>
